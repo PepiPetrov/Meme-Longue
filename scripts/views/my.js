@@ -4,7 +4,7 @@ import { getMyMemes } from '../api/data.js'
 const template = (data = []) => html`
 <section id="user-profile-page" class="user-profile">
     <article class="user-info">
-        <img id="user-avatar-url" alt="user-profile" src='/images/female.png'>
+        <img id="user-avatar-url" alt="user-profile" src='/images/${sessionStorage.getItem('gender')}.png'>
         <div class="user-content">
             <p>Username: ${sessionStorage.getItem('username')}</p>
             <p>Email: ${sessionStorage.getItem('email')}</p>
