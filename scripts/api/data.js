@@ -1,0 +1,38 @@
+import * as api from './api.js';
+
+
+const host = 'http://localhost:3030';
+api.settings.host = host;
+
+export const login = api.login;
+export const register = api.register;
+export const logout = api.logout;
+
+export async function getMemes() {
+    const teams = await api.get(host + '/data/memes?sortBy=_createdOn%20desc');
+    return teams;
+}
+
+export async function getMeme(id) {
+    return await api.get(host + '/data/memes/' + id);
+}
+
+export async function createMeme(article) {
+    const result = await api.post(host + '/data/memes', article);
+    
+    return result;
+}
+
+export async function editMeme(id, article) {
+    return await api.put(host + '/data/memes/' + id, article);
+}
+
+export async function deleteMeme(id) {
+    return await api.del(host + '/data/memes/' + id);
+}
+
+export async function getMyMemes(){
+    const userId=sessionStorage.getItem('userId')
+    const data=await api.get(host+`/data/memes?where=_ownerId%3D%22${userId}%22&sortBy=_createdOn%20desc`)
+    return data
+}
